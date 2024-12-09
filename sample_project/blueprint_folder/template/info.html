@@ -76,7 +76,57 @@
                         <h3>Users Information</h3>
                     </div>
                     <div class="card-body">
+                        
                         <table class="table table-dark table-striped table-hover table-bordered text-white">
+                            <div class="for-a">
+                                <button type="button" class="btn btn-success rounded fw-bold d-flex align-items-center mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                    + Add
+                                </button>
+                            </div>
+                            <form method="POST" action="{{url_for('blueprint.add')}}">
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content bg-dark text-white">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel1">ADD</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="first_name" class="form-label text-light">Firstname</label>
+                                                <input type="text" class="form-control" id="firstNameInput" value="" name="firstname" required>
+                                                <div id="firstNameError" style="color: red; margin-top: 10px;"></div>
+                                                
+                                                <label for="middle_name" class="form-label text-light">Middlename</label>
+                                                <input type="text" class="form-control" id="middleNameInput" value="" name="middlename" required>
+                                                <div id="middleNameError" style="color: red; margin-top: 10px;"></div>
+                            
+                                                <label for="last_name" class="form-label text-light">Lastname</label>
+                                                <input type="text" class="form-control" id="lastNameInput" value="" name="lastname" required>
+                                                <div id="lastNameError" style="color: red; margin-top: 10px;"></div>
+                            
+                                                <label for="birthday" class="form-label text-light">Birthday</label>
+                                                <input type="date" class="form-control" id="birthdayInput" value="" name="birthday" required>
+                                                <div id="birthdayError" style="color: red; margin-top: 10px;"></div>
+                            
+                                                <label for="age" class="form-label text-light">Age</label>
+                                                <input type="text" class="form-control" id="ageInput" value="" name="age" required>
+                                                <div id="ageError" style="color: red; margin-top: 10px;"></div>
+                            
+                                                <label for="contactnumber" class="form-label text-light">Contact Number</label>
+                                                <input type="text" class="form-control" id="contactnumberInput" value="" name="contactnumber" required>
+                                                <div id="contactnumberError" style="color: red; margin-top: 10px;"></div>
+                            
+                                                <label for="email" class="form-label text-light">Email</label>
+                                                <input type="text" class="form-control" id="emailInput" value="" name="email" required>
+                                                <div id="emailError" style="color: red; margin-top: 10px;"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{url_for('blueprint.info')}}" id="submitLink" class="btn btn-success">Save changes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>    
                             <thead class="table-secondary text-dark">
                                 <tr>
                                     <th>Firstname</th>
@@ -98,7 +148,7 @@
                                     <td>{{ users[5] }}</td>
                                     <td>{{ users[6] }}</td>
                                     <td>{{ users[7] }}</td>
-                                    <td><a href="{{ url_for('blueprint.delete', user_id=users[0]) }}">Delete</a></td>
+                                    <td><a href="{{ url_for('blueprint.delete', user_id=users[0])}}" class="btn btn-danger rounded fw-bold">Delete</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -111,5 +161,6 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>
