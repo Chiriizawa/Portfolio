@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Activity</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename = '/css/style.css')}}">
+</head>
+<body class="bg-dark">
+    
+    <nav class="navbar fixed-top mt-4 ms-4">
+        <div class="container-fluid">
+            <button class="navbar-toggler bg-white " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon bg-white"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasLabel"></h5>
+            <button type="button" class="btn-close bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-start" style="height: 100%; padding-left: 20px; padding-top: 20px;">
+            
+            <img src="{{ url_for('static', filename='img/portfolio.jpg') }}" class="max-img rounded-pill" alt="Portfolio Image">
+            <div class="d-flex justify-content-start align-items-center ms-5 mt-3">
+                <a href="#" class="text-decoration-none">
+                    <i class="fa-brands fa-facebook text-white icon-spacing" style="font-size: 25px;"></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <i class="fa-brands fa-instagram text-white ms-3" style="font-size: 27px;"></i>
+                </a>
+            </div>
+            
+            
+            <h5 class="font-sans fs-2 mt-1 mb-2" style="text-align: left;">Raymund Bucton</h5>
+            
+            
+            <ul class="navbar-nav mb-auto gap-4 ps-4">
+                <li class="nav-item">
+                    <a class="nav-link active for-a" aria-current="page" href="{{ url_for('blueprint.dashboard') }}">
+                        <i class="fa-solid fa-house-chimney" style="font-size: 20px;"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active for-a" aria-current="page" href="{{url_for('blueprint.profile')}}">
+                        <i class="fa-solid fa-user" style="font-size: 20px;"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active for-a" aria-current="page" href="{{url_for('blueprint.info')}}">
+                        <i class="fa-solid fa-address-book" style="font-size: 20px;"></i> Info
+                    </a>
+                </li>
+                <li class="nav-item for-a">
+                    <a class="nav-link" href="{{url_for('blueprint.python')}}">
+                        <i class="fa-brands fa-python" style="font-size: 20px;"></i> Blog
+                    </a>
+                </li>
+            </ul>
+            
+            <a href="{{url_for('blueprint.logout')}}" style="color: #ffffff; text-decoration: none; font-size: 22px; margin-top: auto;">
+                <i class="fa-solid fa-right-from-bracket" style="font-size: 20px;"></i> Log Out
+            </a>
+        </div>
+    </div>
+    
+    <div class="container mt-5 max-pad">
+        <div class="row justify-content-center d-flex flex-wrap">
+            
+            <div class="col-2 mb-3 mt-5">
+                <div class="card bg-dark w-100 mt-5">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white text-center w-100">Activity 1</h5>
+                        <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity1">
+                            View
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modalActivity1" tabindex="-1" aria-labelledby="modalActivity1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header bg-dark">
+                                    <h1 class="modal-title fs-5 text-white" id="modalActivity1Label">Activity 1</h1>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <img src="{{url_for('static', filename = 'img/Activity1.png')}}" class="img-fluid" alt="Activity 1">
+                                    <div class="accordion accordion-flush" id="accordionActivity1">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse1" aria-expanded="false" aria-controls="flushCollapse1">
+                                                    Activity 1 Source Code
+                                                </button>
+                                            </h2>
+                                            <div id="flushCollapse1" class="accordion-collapse collapse" data-bs-parent="#accordionActivity1">
+                                                <div class="accordion-body bg-dark text-white">
+                                                    <pre><code class="text-white">
+    class Raymund:
+        def __init__(self, StudentID, lname, fname, mname, CourseCode, Subject):
+            self.StudentID = StudentID
+            self.lname = lname
+            self.fname = fname
+            self.mname = mname
+            self.CourseCode = CourseCode
+            self.Subject = Subject
+    
+        def Bucton(self):
+            print(f"{self.fname} {self.mname} {self.lname} {self.StudentID} {self.Subject} {self.CourseCode}")
+    
+    info = Raymund("231-0377", "Bucton", "Raymund", "Bergonia", 2105, "Object Oriented Programming in Python")
+    print(info.fname, info.mname, info.lname, info.StudentID, info.Subject, info.CourseCode)
+                                                    </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-2 mb-3 mt-5">
+                <div class="card bg-dark w-100 mt-5">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white text-center w-100">Activity 2</h5>
+                        <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity2">
+                            View
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modalActivity2" tabindex="-1" aria-labelledby="modalActivity2Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header bg-dark">
+                                    <h1 class="modal-title fs-5 text-white" id="modalActivity2Label">Activity 2</h1>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <img src="{{url_for('static', filename = 'img/Activity2.jpg')}}" class="img-fluid" alt="Activity 2">
+                                    <div class="accordion accordion-flush" id="accordionActivity2">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse2" aria-expanded="false" aria-controls="flushCollapse2">
+                                                    Activity 2 Source Code
+                                                </button>
+                                            </h2>
+                                            <div id="flushCollapse2" class="accordion-collapse collapse" data-bs-parent="#accordionActivity2">
+                                                <div class="accordion-body bg-dark text-white">
+                                                    <pre><code class="text-white">
+    def count_vowels(vow):
+        vowels = 'aeiou'
+        count = 0
+        for a in vow:
+            if a in vowels:
+                count += 1
+        return count
+    
+    assert count_vowels("banana") == 3
+    assert count_vowels("ubuntu") == 3
+    assert count_vowels("mango") == 2
+    assert count_vowels("QQQQ") == 0
+    assert count_vowels("wyrd") == 0
+    print("Exercise 45 is correct.")
+                                                    </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-2 mb-3 mt-5">
+                <div class="card bg-dark w-100 mt-5">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white text-center w-100">Activity 3</h5>
+                        <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity3">
+                            View
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modalActivity3" tabindex="-1" aria-labelledby="modalActivity3Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header bg-dark">
+                                    <h1 class="modal-title fs-5 text-white" id="modalActivity3Label">Activity 3</h1>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <img src="{{url_for('static', filename = 'img/Activity3.jpg')}}" class="img-fluid" alt="Activity 3">
+                                    <div class="accordion accordion-flush" id="accordionActivity3">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse3" aria-expanded="false" aria-controls="flushCollapse3">
+                                                    Activity 3 Source Code
+                                                </button>
+                                            </h2>
+                                            <div id="flushCollapse3" class="accordion-collapse collapse" data-bs-parent="#accordionActivity3">
+                                                <div class="accordion-body bg-dark text-white">
+                                                    <pre><code class="text-white">
+    def grade():
+        try:
+            prelim = float(input("Enter Your Prelim Grade: "))
+            midterm = float(input("Enter Your Midterm Grade: "))
+            finals = float(input("Enter Your Finals Grade: "))
+        except:
+            print("Invalid")
+            return
+        else:
+            gwa = (prelim + midterm + finals) / 3
+            if gwa > 100:
+                print("Invalid")
+                return
+            if gwa >= 75:
+                print("Passed")
+            else:
+                print("Failed")
+        finally:
+            print(f"GWA", gwa)
+    grade()
+                                                    </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-2 mb-3 mt-5">
+                <div class="card bg-dark w-100 mt-5">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white text-center w-100">Activity 4</h5>
+                        <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity4">
+                            View
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modalActivity4" tabindex="-1" aria-labelledby="modalActivity4Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header bg-dark">
+                                    <h1 class="modal-title fs-5 text-white" id="modalActivity4Label">Activity 4</h1>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <img src="{{url_for('static', filename = 'img/Activity4.jpg')}}" class="img-fluid" alt="Activity 4">
+                                    <div class="accordion accordion-flush" id="accordionActivity4">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse4" aria-expanded="false" aria-controls="flushCollapse4">
+                                                    Activity 4 Source Code
+                                                </button>
+                                            </h2>
+                                            <div id="flushCollapse4" class="accordion-collapse collapse" data-bs-parent="#accordionActivity4">
+                                                <div class="accordion-body bg-dark text-white">
+                                                    <pre><code class="text-white">
+    class Fruit:
+        def __init__(self, name, color):
+            self.name = name
+            self.color = color
+    
+        def __str__(self):
+            return f"The {self.name} is {self.color}."
+    
+    fruits = [
+        Fruit("Peach", "Pink"),
+        Fruit("Blueberry", "Blue"),
+        Fruit("Rambutan", "Red"),
+        Fruit("Orange", "Orange"),
+        Fruit("Banana", "Yellow"),
+        Fruit("Tamarind", "Brown"),
+        Fruit("Apple", "Red"),
+        Fruit("Mango", "Green"),
+        Fruit("Watermelon", "Green Outside Red Inside"),
+        Fruit("Grapes", "Violet")
+    ]
+    
+    print("Fruits:")
+    for fruit in fruits:
+        print(fruit)
+                                                    </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-2 mb-3 mt-5">
+                <div class="card bg-dark w-100 mt-5">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white text-center w-100">Activity 5</h5>
+                        <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity5">
+                            View
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modalActivity5" tabindex="-1" aria-labelledby="modalActivity5Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header bg-dark">
+                                    <h1 class="modal-title fs-5 text-white" id="modalActivity5Label">Activity 5</h1>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <img src="{{url_for('static', filename = 'img/Activity5.jpg')}}" class="img-fluid" alt="Activity 5">
+                                    <div class="accordion accordion-flush" id="accordionActivity5">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse5" aria-expanded="false" aria-controls="flushCollapse5">
+                                                    Activity 5 Source Code
+                                                </button>
+                                            </h2>
+                                            <div id="flushCollapse5" class="accordion-collapse collapse" data-bs-parent="#accordionActivity5">
+                                                <div class="accordion-body bg-dark text-white">
+                                                    <pre><code class="text-white">
+    WALA PANG SOURCE CODE
+                                                    </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container mt-5 max-pad">
+    <div class="row justify-content-center d-flex flex-wrap">
+        <div class="col-2 mb-3">
+            <div class="card bg-dark w-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-white text-center w-100">Activity 6</h5>
+                    <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity6">
+                        View
+                    </button>
+                </div>
+                <div class="modal fade" id="modalActivity6" tabindex="-1" aria-labelledby="modalActivity6Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h1 class="modal-title fs-5 text-white" id="modalActivity6Label">Activity 6</h1>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <img src="{{url_for('static', filename = 'img/Activity6_mainpy.png')}}" class="img-fluid" alt="Activity 6">
+                                <img src="{{url_for('static', filename = 'img/Activity6_solutionpy.png')}}" class="img-fluid" alt="Activity 6">
+                                <img src="{{url_for('static', filename = 'img/Activity6_resultpy.png')}}" class="img-fluid" alt="Activity 6">
+                                <div class="accordion accordion-flush" id="accordionActivity6">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse6" aria-expanded="false" aria-controls="flushCollapse6">
+                                                Activity 6 Source Code
+                                            </button>
+                                        </h2>
+                                        <div id="flushCollapse6" class="accordion-collapse collapse" data-bs-parent="#accordionActivity6">
+                                            <div class="accordion-body bg-dark text-white">
+                                                <pre><code class="text-white">
+    result.py
+    def result(grade):
+        if grade <= 10 and grade >= 75:
+            print("Passed")
+        elif grade <=75:
+            print("Failed")
+        else:
+            print("Invalid")
+    
+    solution.py
+    def solution(prelim, midterm, finals):
+        grade  (prelim * 0.30) + (midterm * 0.30) + (finals * 0.40)
+        if grade != int(grade):
+            grade = int(grade) + 1
+        return round(grade)
+
+    main.py
+    from grading.solution import solution
+    from grading.result import result
+
+    prelim = float(input("Prelim: "))
+    midterm = float(input("Midterm: "))
+    finals = float(input("Finals: "))
+
+    calculate = solution(prelim, midterm, finals)
+    result = result(calculate)
+    if calculate > 100:
+        print("Invalid") 
+    elif prelim >= 100 and prelim <=75:
+        print("Invalid", calculate)
+    else
+        print(f"Average: {calculate: 2f}")
+                                                </code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3">
+            <div class="card bg-dark w-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-white text-center w-100">Activity 7</h5>
+                    <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity7">
+                        View
+                    </button>
+                </div>
+                <div class="modal fade" id="modalActivity7" tabindex="-1" aria-labelledby="modalActivity7Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h1 class="modal-title fs-5 text-white" id="modalActivity7Label">Activity 7</h1>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <img src="{{url_for('static', filename = 'img/Activity7.jpg')}}" class="img-fluid" alt="Activity 7">
+                                <div class="accordion accordion-flush" id="accordionActivity7">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse7" aria-expanded="false" aria-controls="flushCollapse7">
+                                                Activity 7 Source Code
+                                            </button>
+                                        </h2>
+                                        <div id="flushCollapse7" class="accordion-collapse collapse" data-bs-parent="#accordionActivity7">
+                                            <div class="accordion-body bg-dark text-white">
+                                                <pre><code class="text-white">
+    from collections import namedtuple, Counter
+    import datetime
+                                                    
+    myinfo = namedtuple("myinfo", ['name', 'age', 'schedule', 'hrs'])
+                                                    
+    birthday = datetime.date(2005, 3, 27)
+    today = datetime.date.today()
+    age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
+                                                    
+    schedule = {
+        'Monday': [
+            "IT2104 - 09:00 - 10:00",
+            "IT2102 - 10:00 - 11:00",
+            "CC2103 - 11:00 - 12:00",
+            "IT2104 - 13:00 - 14:00",
+            "IT2102 - 14:00 - 15:00",
+            "PATHFIT3 - 15:00 - 16:00"
+            ],
+        'Tuesday': [
+            "PATHFIT3 - 07:00 - 08:00",
+            "IT2105 - 09:00 - 11:00",
+            "IT2103 - 11:00 - 13:00",
+            "CC2104 - 15:00 - 17:00",
+            "CC2103 - 17:00 - 19:00"
+            ],
+        'Wednesday': [
+            "IT2104 - 09:00 - 10:00",
+            "IT2102 - 10:00 - 11:00",
+            "CC2103 - 11:00 - 12:00",
+            "IT2105 - 13:00 - 14:00",
+            "CC2104 - 14:00 - 15:00",
+            "CC2103 - 15:00 - 16:00",
+            "SSP04 - 16:00 - 18:00"
+            ],
+        'Thursday': [
+            "SSP04 - 11:00 - 12:00",
+            "IT2104 - 13:00 - 15:00"
+            ],
+        'Friday': [
+            "IT2105 - 09:00 - 11:00",
+            "IT2102 - 11:30 - 13:30",
+            "CC2103 - 14:00 - 15:00",
+            "CC2104 - 15:00 - 17:00"
+            ]
+        }
+    hrs = 5 + 8 + 8 + 3 + 7
+                                                    
+    myinfo = myinfo(name="Raymund B. Bucton", age=age, schedule=schedule, hrs=hrs)
+                                                    
+    result = (
+        f"Fullname: {myinfo.name},\nAge:{myinfo.age}\n"
+        f"\nSchedule:\n"
+        f"\nMonday: {myinfo.schedule['Monday']}\n"
+        f"\nTuesday: {myinfo.schedule['Tuesday']}\n"
+        f"\nWednesday: {myinfo.schedule['Wednesday']}\n"
+        f"\nThursday: {myinfo.schedule['Thursday']}\n"
+        f"\nFriday: {myinfo.schedule['Friday']}\n"
+        f"\nTotal Weekly Hours: {myinfo.hrs}"
+    )
+                                                    
+    counts = Counter(result.translate(str.maketrans("", "", "{}',")).split())
+                                                    
+    print(result)
+    print("\nCounts:\n")
+    print(counts)
+                                                </code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3">
+            <div class="card bg-dark w-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-white text-center w-100">Activity 8</h5>
+                    <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity8">
+                        View
+                    </button>
+                </div>
+                <div class="modal fade" id="modalActivity8" tabindex="-1" aria-labelledby="modalActivity8Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h1 class="modal-title fs-5 text-white" id="modalActivity8Label">Activity 8</h1>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <img src="{{url_for('static', filename = 'img/Activity.jpg')}}" class="img-fluid" alt="Activity 8">
+                                <div class="accordion accordion-flush" id="accordionActivity8">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#flushCollapse8" aria-expanded="false" aria-controls="flushCollapse8">
+                                                Activity 8 Source Code
+                                            </button>
+                                        </h2>
+                                        <div id="flushCollapse8" class="accordion-collapse collapse" data-bs-parent="#accordionActivity8">
+                                            <div class="accordion-body bg-dark text-white">
+                                                <pre><code class="text-white">
+                                                                    WALA PA
+                                                </code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3">
+            <div class="card bg-dark w-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-white text-center w-100">Activity 9</h5>
+                    <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity9">
+                        View
+                    </button>
+                </div>
+                <div class="modal fade" id="modalActivity9" tabindex="-1" aria-labelledby="modalActivity9Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h1 class="modal-title fs-5 text-white" id="modalActivity9Label">Activity 9</h1>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <p class="text-white fs-5"> VOUCHER </p>
+                            </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3">
+            <div class="card bg-dark w-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-white text-center w-100">Activity 10</h5>
+                    <button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#modalActivity10">
+                        View
+                    </button>
+                </div>
+                <div class="modal fade" id="modalActivity10" tabindex="-1" aria-labelledby="modalActivity10Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h1 class="modal-title fs-5 text-white" id="modalActivity10Label">Activity 10</h1>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <p class="text-white fs-5"> VOUCHER </p>
+                            </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.max-img{
+    width: 200px;
+    height: auto;
+}
+
+.max-gap{
+    width: 15em; 
+    height: 15em;
+}
+
+.max-pad{
+    padding-left: 85px;
+}
+
+.for-a{
+    color: #ffffff; 
+    text-decoration: none; 
+    font-size: 22px; 
+    font-family: Verdana, sans-serif; 
+    margin-top: 15px;
+}
