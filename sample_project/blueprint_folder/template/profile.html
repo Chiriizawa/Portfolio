@@ -90,9 +90,10 @@
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Update Profile</h1>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        {% for users in data %}
                         <div class="modal-body">
                             <label for="first_name" class="form-label text-light">Firstname</label>
-                            <input type="text" class="form-control" id="firstNameInput" value="" name="firstname" required>
+                            <input type="text" class="form-control" id="firstNameInput" value="{{ users['1'] }}" name="firstname" required>
                             <div id="firstNameError" style="color: red; margin-top: 10px;"></div>
                             
                             <label for="middle_name" class="form-label text-light">Middlename</label>
@@ -119,6 +120,7 @@
                             <input type="text" class="form-control" id="emailInput" value="" name="email" required>
                             <div id="emailError" style="color: red; margin-top: 10px;"></div>
                         </div>
+                        {% endfor %}
                         <div class="modal-footer">
                             <a href="{{url_for('blueprint.profile')}}"><button type="submit" class="btn btn-success" id="submitBtn">Save changes</button></a>
                         </div>

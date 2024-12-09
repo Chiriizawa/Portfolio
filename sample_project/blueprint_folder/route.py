@@ -144,19 +144,19 @@ def edit(user_id):
     else:
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
-        student = None
+        users = None
         try:
-            cursor.execute('SELECT id, firstname, middlename, lastname, birthday, age, contactnumber, email FROM practb WHERE id = %s;', (user_id,))
-            student = cursor.fetchone()
-            if student is None:
-                return "Student not found", 404
+            cursor.execute('SELECT id, firstname, middlename, lastname, birthday, age, contactnumber, email FROM tbl_project WHERE id = %s;', (user_id,))
+            users = cursor.fetchone()
+            if users is None:
+                return "User not found", 404
         except mysql.connector.Error as e:
             return f"Error: {str(e)}"
         finally:
             cursor.close()
             connection.close()
 
-        return render_template('profile.html', student=student)
+        return render_template('profile.html', users=users)
 
 @blueprint.route('/add', methods=['POST', 'GET'])
 def add():
