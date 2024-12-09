@@ -1,6 +1,6 @@
 const validateFirstName = (firstName) => {
-    const regex = /^[A-Za-z\s]+$/;
-    const repeatedCharRegex = /(.)\1{2,}/;
+    const regex = /^[A-Za-z\s]+$/; 
+    const repeatedCharRegex = /(.)\1{2,}/; 
     const maxLength = 20;
 
     if (!firstName) return "First name is required.";
@@ -14,7 +14,7 @@ const validateFirstName = (firstName) => {
 const validateMiddleName = (middleName) => {
     const regex = /^[A-Za-z\s]+$/;
     const repeatedCharRegex = /(.)\1{2,}/;
-    const maxLength = 20;
+    const maxLength = 20; 
 
     if (middleName && !regex.test(middleName.trim())) return "Middle name must not contain special characters or numbers.";
     if (middleName && middleName.trim().length < 3) return "Middle name must be at least 3 characters long.";
@@ -26,7 +26,7 @@ const validateMiddleName = (middleName) => {
 const validateLastName = (lastName) => {
     const regex = /^[A-Za-z\s]+$/;
     const repeatedCharRegex = /(.)\1{2,}/;
-    const maxLength = 20;
+    const maxLength = 20;  
 
     if (!lastName) return "Last name is required.";
     if (!regex.test(lastName.trim())) return "Last name must not contain special characters or numbers.";
@@ -44,13 +44,15 @@ const validateBirthday = (birthday, age) => {
     const sixtyYearsAgo = new Date("1964-01-01");
 
     if (birthdayDate > currentDate) return "Birthday cannot be a future date.";
-    if (birthdayDate < sixtyYearsAgo) return "The birthdate must not be earlier than January 1, 1964.";
+    if (birthdayDate < sixtyYearsAgo) return "The birthdate must not be earlier than January 1, 1964, based on app standards.";
     if (isNaN(birthdayDate.getTime())) return "Invalid date format.";
 
     const calculatedAge = currentDate.getFullYear() - birthdayDate.getFullYear();
     const isBirthdayPastThisYear = currentDate.getMonth() > birthdayDate.getMonth() ||
         (currentDate.getMonth() === birthdayDate.getMonth() && currentDate.getDate() >= birthdayDate.getDate());
     const finalCalculatedAge = isBirthdayPastThisYear ? calculatedAge : calculatedAge - 1;
+
+    console.log(`Calculated Age: ${finalCalculatedAge}, Provided Age: ${age}`);
 
     if (Number(finalCalculatedAge) !== Number(age)) {
         return `The age (${age}) does not match the birthday.`;
@@ -64,7 +66,7 @@ const validateAge = (age) => {
     if (age < 18) return "Age does not align with your given birthday.";
     if (age > 60) return "Age does not align with your given birthday";
     return "";
-};
+}
 
 const validateContactNumber = (contactNumber) => {
     const regex = /^09\d{9}$/;
@@ -82,14 +84,49 @@ const validateContactNumber = (contactNumber) => {
     }
 
     return "";
-};
+}
 
-const submitLink = document.getElementById("submitLink");
+const validateEmail = (email) => {
+    const validProviders = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'aol.com', 'icloud.com'];
 
-const redirectUrl = "{{ url_for('blueprint.info') }}";
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|edu|gov|co|io|co\.uk)$/;
 
-submitLink.addEventListener("click", (event) => {
-    event.preventDefault();  
+    if (!email) return "Email is required.";
+
+    if (!emailRegex.test(email.trim())) return "Invalid email format. Please use a valid email provider.";
+
+    const domain = email.split('@')[1];
+
+    if (domain && !validProviders.includes(domain)) {
+        return `Invalid email format. ${domain} is not a recognized email provider.`;
+    }
+
+    if (domain && /\d/.test(domain.split('.')[0]) && !domain.endsWith('.co.uk')) {
+        return "Invalid email format. Domain should not contain numbers.";
+    }
+
+    return "";
+}
+
+const firstNameInput = document.getElementById("firstNameInput");
+const middleNameInput = document.getElementById("middleNameInput");
+const lastNameInput = document.getElementById("lastNameInput");
+const birthdayInput = document.getElementById("birthdayInput");
+const ageInput = document.getElementById("ageInput")
+const contactnumberInput = document.getElementById("contactnumberInput")
+const emailInput = document.getElementById("emailInput")
+const errorMessage = document.getElementById("error-message");
+const submitBtn = document.getElementById("submitBtn");
+
+const firstNameForm = document.getElementById("firstNameForm");
+const middleNameForm = document.getElementById("middleNameForm");
+const lastNameForm = document.getElementById("lastNameForm");
+const birthdayForm = document.getElementById("birthdayForm");
+const ageForm = document.getElementById("ageForm")
+const contactnumberForm = document.getElementById("contactnumberForm")
+const emailForm = document.getElementById("emailForm")
+
+submitBtn.addEventListener("click", () => {
 
     const firstNameError = document.getElementById("firstNameError");
     const middleNameError = document.getElementById("middleNameError");
@@ -110,10 +147,10 @@ submitLink.addEventListener("click", (event) => {
     const firstNameValidationMessage = validateFirstName(firstNameInput.value);
     const middleNameValidationMessage = validateMiddleName(middleNameInput.value);
     const lastNameValidationMessage = validateLastName(lastNameInput.value);
-    const birthdayValidationMessage = validateBirthday(birthdayInput.value, ageInput.value);
-    const ageValidationMessage = validateAge(ageInput.value);
-    const contactnumberValidationMessage = validateContactNumber(contactnumberInput.value);
-    const emailValidationMessage = validateEmail(emailInput.value);
+    const birthdayValidationMessage = validateBirthday(birthdayInput.value, ageInput.value); 
+    const ageValidationMessage = validateAge(ageInput.value); 
+    const contactnumberValidationMessage = validateContactNumber(contactnumberInput.value); 
+    const emailValidationMessage = validateEmail(emailInput.value); 
 
     let hasErrors = false;
 
@@ -121,32 +158,49 @@ submitLink.addEventListener("click", (event) => {
         firstNameError.textContent = firstNameValidationMessage;
         hasErrors = true;
     }
+
     if (middleNameValidationMessage) {
         middleNameError.textContent = middleNameValidationMessage;
         hasErrors = true;
     }
+
     if (lastNameValidationMessage) {
         lastNameError.textContent = lastNameValidationMessage;
         hasErrors = true;
     }
+
     if (birthdayValidationMessage) {
         birthdayError.textContent = birthdayValidationMessage;
         hasErrors = true;
     }
+
     if (ageValidationMessage) {
         ageError.textContent = ageValidationMessage;
         hasErrors = true;
     }
+
     if (contactnumberValidationMessage) {
         contactnumberError.textContent = contactnumberValidationMessage;
         hasErrors = true;
     }
+
     if (emailValidationMessage) {
         emailError.textContent = emailValidationMessage;
         hasErrors = true;
     }
 
     if (!hasErrors) {
-        window.location.href = redirectUrl; 
+        firstNameForm.value = firstNameInput.value;
+        middleNameForm.value = middleNameInput.value;
+        lastNameForm.value = lastNameInput.value;
+        birthdayForm.value = birthdayInput.value;
+        ageForm.value = ageInput.value;
+        contactnumberForm.value = contactnumberInput.value;
+        emailForm.value = emailInput.value;
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("exampleModal"));
+        modal.hide();
+
+        alert("Profile updated successfully!");
     }
 });
