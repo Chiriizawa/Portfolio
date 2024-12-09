@@ -86,14 +86,11 @@ const validateContactNumber = (contactNumber) => {
 
 const submitLink = document.getElementById("submitLink");
 
-// Get the URL from the `url_for` function and ensure it's passed correctly
 const redirectUrl = "{{ url_for('blueprint.info') }}";
 
-// Event listener for the <a> tag
 submitLink.addEventListener("click", (event) => {
-    event.preventDefault();  // Prevent default <a> behavior (navigation)
+    event.preventDefault();  
 
-    // Clear existing error messages
     const firstNameError = document.getElementById("firstNameError");
     const middleNameError = document.getElementById("middleNameError");
     const lastNameError = document.getElementById("lastNameError");
@@ -110,7 +107,6 @@ submitLink.addEventListener("click", (event) => {
     contactnumberError.textContent = "";
     emailError.textContent = "";
 
-    // Get validation messages from your validation functions
     const firstNameValidationMessage = validateFirstName(firstNameInput.value);
     const middleNameValidationMessage = validateMiddleName(middleNameInput.value);
     const lastNameValidationMessage = validateLastName(lastNameInput.value);
@@ -121,7 +117,6 @@ submitLink.addEventListener("click", (event) => {
 
     let hasErrors = false;
 
-    // Check if there are validation errors
     if (firstNameValidationMessage) {
         firstNameError.textContent = firstNameValidationMessage;
         hasErrors = true;
@@ -151,8 +146,7 @@ submitLink.addEventListener("click", (event) => {
         hasErrors = true;
     }
 
-    // If there are no errors, proceed with the redirection (submit)
     if (!hasErrors) {
-        window.location.href = redirectUrl;  // Manually redirect to the desired page
+        window.location.href = redirectUrl; 
     }
 });
