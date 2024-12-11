@@ -13,31 +13,52 @@
         <form action="{{ url_for('blueprint.add') }}" method="post" class="p-3 border rounded mx-auto" style="max-width: 550px; margin-top: 90px;">
             <div class="mb-2">
                 <label for="firstname" class="form-label">Firstname</label>
-                <input type="text" name="firstname" id="firstname" class="form-control" required>
+                <input type="text" name="firstname" id="firstname" value="{{ form_data['firstname'] }}" class="form-control" required>
+                {% if errors['firstname'] %}
+                <p class="text-danger">{{ errors['firstname'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="middlename" class="form-label">Middlename</label>
-                <input type="text" name="middlename" id="middlename" class="form-control" required>
+                <input type="text" name="middlename" id="middlename" value="{{ form_data['middlename'] }}"  class="form-control" required>
+                {% if errors['middlename'] %}
+                <p class="text-danger">{{ errors['middlename'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="lastname" class="form-label">Lastname</label>
-                <input type="text" name="lastname" id="lastname" class="form-control" required>
+                <input type="text" name="lastname" id="lastname" value="{{ form_data['lastname'] }}" class="form-control" required>
+                {% if errors['lastname'] %}
+                <p class="text-danger">{{ errors['lastname'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="birthday" class="form-label">Birthday:</label>
-                <input type="date" name="birthday" id="birthday" class="form-control" required>
+                <input type="date" name="birthday" id="birthday" value="{{ form_data['birthday'] }}" class="form-control" required>
+                {% if errors['birthday'] %}
+                <p class="text-danger">{{ errors['birthday'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="age" class="form-label">Age</label>
-                <input type="text" name="age" id="age" class="form-control" required>
+                <input type="text" name="age" id="age" value="{{ form_data['age'] }}" class="form-control" required>
+                {% if errors['age'] %}
+                <p class="text-danger">{{ errors['age'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="contactnumber" class="form-label">Contact Number</label>
-                <input type="text" name="contactnumber" id="contactnumber" class="form-control" required>
+                <input type="text" name="contactnumber" id="contactnumber" value="{{ form_data['contactnumber'] }}" class="form-control" required>
+                {% if errors['contactnumber'] %}
+                <p class="text-danger">{{ errors['contactnumber'] }}</p>
+                {% endif %}
             </div>
             <div class="mb-2">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" name="email" id="email" class="form-control" required>
+                <input type="text" name="email" id="email" value="{{ form_data['email'] }}" class="form-control" required>
+                {% if errors['email'] %}
+                <p class="text-danger">{{ errors['email'] }}</p>
+                {% endif %}
             </div>
             <div class="text-center">
                 <a href="{{url_for('blueprint.info')}}"></a><button type="submit" class="btn btn-success w-100">Add User</button>
