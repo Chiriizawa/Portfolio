@@ -7,15 +7,15 @@ def validate_first_name(first_name: str) -> str:
     max_length = 20
 
     if not first_name:
-        return "First name is required."
+        return "Firstname is required."
     if not re.match(regex, first_name.strip()):
-        return "First name must not contain special characters or numbers."
-    if len(first_name.strip()) < 2:
-        return "First name must be at least 2 characters long."
+        return "Firstname must not contain special characters or numbers."
+    if len(first_name.strip()) < 3:
+        return "Firstname must be at least 3 characters long."
     if len(first_name.strip()) > max_length:
-        return f"First name must be at most {max_length} characters long."
+        return f"Firstname must be at most {max_length} characters long."
     if re.search(repeated_char_regex, first_name.strip()):
-        return "First name must not contain repeated characters."
+        return "Firstname must not contain repeated characters."
     return ""
 
 def validate_middle_name(middle_name: str) -> str:
@@ -25,13 +25,13 @@ def validate_middle_name(middle_name: str) -> str:
 
     if middle_name:
         if not re.match(regex, middle_name.strip()):
-            return "Middle name must not contain special characters or numbers."
-        if len(middle_name.strip()) < 2:
-            return "Middle name must be at least 2 characters long."
+            return "Middlename must not contain special characters or numbers."
+        if len(middle_name.strip()) < 3:
+            return "Middlename must be at least 3 characters long."
         if len(middle_name.strip()) > max_length:
-            return f"Middle name must be at most {max_length} characters long."
+            return f"Middlename must be at most {max_length} characters long."
         if re.search(repeated_char_regex, middle_name.strip()):
-            return "Middle name must not contain repeated characters."
+            return "Middlename must not contain repeated characters."
     return ""
 
 def validate_last_name(last_name: str) -> str:
@@ -40,15 +40,15 @@ def validate_last_name(last_name: str) -> str:
     max_length = 20
 
     if not last_name:
-        return "Last name is required."
+        return "Lastname is required."
     if not re.match(regex, last_name.strip()):
-        return "Last name must not contain special characters or numbers."
-    if len(last_name.strip()) < 2:
-        return "Last name must be at least 2 characters long."
+        return "Lastname must not contain special characters or numbers."
+    if len(last_name.strip()) < 3:
+        return "Lastname must be at least 3 characters long."
     if len(last_name.strip()) > max_length:
-        return f"Last name must be at most {max_length} characters long."
+        return f"Lastname must be at most {max_length} characters long."
     if re.search(repeated_char_regex, last_name.strip()):
-        return "Last name must not contain repeated characters."
+        return "Lastname must not contain repeated characters."
     return ""
 
 def validate_birthday(birthday: str, age: int) -> str:
@@ -61,12 +61,12 @@ def validate_birthday(birthday: str, age: int) -> str:
         return "Invalid date format."
 
     current_date = datetime.now()
-    sixty_years_ago = datetime(1964, 1, 1)
+    sixty_years_ago = datetime(1950, 1, 1)
 
     if birthday_date > current_date:
         return "Birthday cannot be a future date."
     if birthday_date < sixty_years_ago:
-        return "The birthdate must not be earlier than January 1, 1964, based on app standards."
+        return "Birthdates before January 1, 1950, are not allowed"
 
     calculated_age = current_date.year - birthday_date.year
     if (current_date.month, current_date.day) < (birthday_date.month, birthday_date.day):
@@ -83,7 +83,7 @@ def validate_age(age: int) -> str:
     if age < 18:
         return "Age must be at least 18."
     if age > 60:
-        return "Age must be less than or equal to 60."
+        return "Age must be less than or equal to your birthdate."
     return ""
 
 def validate_contact_number(contact_number: str) -> str:
@@ -134,8 +134,8 @@ def validate_email(email: str) -> str:
         return "Email is required."
 
     local_part = email.split('@')[0]
-    if len(local_part) > 64:
-        return "The local part (before the '@') of the email address cannot exceed 64 characters."
+    if len(local_part) > 50:
+        return "The local part (before the '@') of the email address cannot exceed 50 characters."
 
     email_regex = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}(\.[a-z]{2,})?$')
 
