@@ -1,0 +1,8 @@
+.card {
+    transition: transform 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Makes the card 5% larger on hover */
+    box-shadow: 1px 1px 4px 2px hsla(0, 1%, 83%, 0.705);
+}
