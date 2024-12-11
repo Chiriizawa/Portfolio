@@ -202,7 +202,7 @@ def edit():
         if 'user' not in session or not session['user']:
             return redirect(url_for('blueprint.index'))
         
-        id = 1  
+        ID = 43  
 
         if request.method == "POST":
             form_data = {
@@ -235,7 +235,7 @@ def edit():
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
             update_query = (
-                "UPDATE tbl_project SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contactnumber=%s, email=%s WHERE id=%s"
+                "UPDATE tbl_project SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contactnumber=%s, email=%s WHERE ID=%s"
             )
             update_values = (
                 form_data['firstname'],
@@ -245,7 +245,7 @@ def edit():
                 age,
                 form_data['contactnumber'],
                 form_data['email'],
-                id,
+                ID,
             )
             cursor.execute(update_query, update_values)
             conn.commit()
@@ -258,8 +258,8 @@ def edit():
 
         conn = connect_db()
         cursor = conn.cursor(dictionary=True)
-        select_query = "SELECT * FROM tbl_project WHERE id = %s"
-        cursor.execute(select_query, (id,))
+        select_query = "SELECT * FROM tbl_project WHERE ID = %s"
+        cursor.execute(select_query, (ID,))
         user_data = cursor.fetchone()
 
 
