@@ -36,15 +36,24 @@ def index():
     if 'user' in session:
         return redirect(url_for('blueprint.dashboard'))
 
+    usernamemsg = ''
+    passwordmsg = ''
     msg = ''
+    
     if request.method == 'POST':
         Username = request.form['Username']
         Password = request.form['Password']
-        if Username == 'Raymund' and Password == '123456789':
+        if Username != 'Raymund':
+            usernamemsg = 'Username is incorrect!'
+
+        if Password != '123456789':
+            passwordmsg = 'Password is incorrect!'
+
+        if not usernamemsg and not passwordmsg:
             try:
                 connection = mysql.connector.connect(**db_config)
                 cursor = connection.cursor()
-                cursor.execute("INSERT INTO tbl_login (username, password) VALUES(%s, %s)", (user['username'], hashed_password))
+                cursor.execute("INSERT INTO tbl_login (username, password) VALUES(%s, %s)", (Username, Password))  # Assuming you are inserting raw data
                 connection.commit()
                 session['user'] = Username
                 return redirect(url_for('blueprint.dashboard'))
@@ -54,9 +63,11 @@ def index():
                 cursor.close()
                 connection.close()
         else:
-            msg = 'Wrong Credentials!'
-    response = make_response(render_template('index.html', msg=msg))
+            msg = usernamemsg or passwordmsg
+
+    response = make_response(render_template('index.html', msg=msg, usernamemsg=usernamemsg, passwordmsg=passwordmsg))
     return make_header(response)
+
 
 @blueprint.route('/dashboard')
 def dashboard():
