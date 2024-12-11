@@ -98,12 +98,33 @@
                     <td>{{ users[6] }}</td>
                     <td>{{ users[7] }}</td>
                     <td>
-                        <a href="{{ url_for('blueprint.delete', user_id=users[0]) }}" class="btn btn-danger rounded fw-bold">Delete</a>
+                        <a href="{{url_for('blueprint.delete', user_id=users[0])}}"></a><button type="button" class="btn btn-danger rounded fw-bold" data-bs-toggle="modal" data-bs-target="#deleteModal{{ users[0] }}">
+                            Delete
+                        </button></a></td>
                     </td>
+                    
+                    <div class="modal fade" id="deleteModal{{ users[0] }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ users[0] }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark">
+                                    <h5 class="modal-title text-light" id="deleteModalLabel{{ users[0] }}">Confirm Deletion</h5>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <p class="text-light">Are you sure you want to delete this user?</p>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <a href="{{ url_for('blueprint.delete', user_id=users[0]) }}" class="btn btn-danger">Yes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        {% endblock %}
     </div>
     
     
