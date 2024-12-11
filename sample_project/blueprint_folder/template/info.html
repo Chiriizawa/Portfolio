@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename = '/css/style.css')}}">
 </head>
-<body class="bg-dark">
+<body class="bg-dark fade-in">
     
     <nav class="navbar fixed-top mt-4 ms-4">
         <div class="container-fluid">
@@ -57,7 +57,7 @@
                 </li>
                 <li class="nav-item for-a">
                     <a class="nav-link" href="{{url_for('blueprint.python')}}">
-                        <i class="fa-brands fa-python" style="font-size: 20px;"></i> Blog
+                        <i class="fa-solid fa-folder" style="font-size: 20px;"></i> Blog
                     </a>
                 </li>
             </ul>
@@ -85,6 +85,7 @@
                     <th>Contact Number</th>
                     <th>Email</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -97,8 +98,9 @@
                     <td>{{ users[5] }}</td>
                     <td>{{ users[6] }}</td>
                     <td>{{ users[7] }}</td>
+                    <td><a href="{{ url_for('blueprint.edit_user', ID = users[0]) }}"><button type="button" class="btn btn-warning rounded">Edit</button></a></td>
                     <td>
-                        <a href="{{url_for('blueprint.delete', user_id=users[0])}}"></a><button type="button" class="btn btn-danger rounded fw-bold" data-bs-toggle="modal" data-bs-target="#deleteModal{{ users[0] }}">
+                        <a href="{{url_for('blueprint.delete', user_id=users[0])}}"></a><button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#deleteModal{{ users[0] }}">
                             Delete
                         </button></a></td>
                     </td>
