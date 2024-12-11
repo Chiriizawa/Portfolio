@@ -67,34 +67,51 @@
             </a>
         </div>
     </div>
-
-    <table class="table table-dark table-striped table-hover table-bordered text-white">
-        <thead class="table-secondary text-dark">
-            <tr>
-                <th class="rotate">Firstname</th>
-                <th class="rotate">Middlename</th>
-                <th class="rotate">Lastname</th>
-                <th class="rotate">Birthday</th>
-                <th class="rotate">Age</th>
-                <th class="rotate">Contact Number</th>
-                <th class="rotate">Email</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for users in data %}
-            <tr class="text-white">
-                <td>{{ users[1] }}</td>
-                <td>{{ users[2] }}</td>
-                <td>{{ users[3] }}</td>
-                <td>{{ users[4] }}</td>
-                <td>{{ users[5] }}</td>
-                <td>{{ users[6] }}</td>
-                <td>{{ users[7] }}</td>
-            </tr>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div style="max-width: 600px; width: 100%;">
+            <table class="table table-dark table-striped table-hover table-bordered text-white">
+                <thead class="table-secondary text-dark">
+                </thead>
+                <tbody>
+                    {% for users in data %}
+                    <tr class="text-white">
+                        <td>Firstname</td>
+                        <td>{{ users[1] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Middlename</td>
+                        <td>{{ users[2] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Lastname</td>
+                        <td>{{ users[3] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Birthday</td>
+                        <td>{{ users[4] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Age</td>
+                        <td>{{ users[5] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Contact Number</td>
+                        <td>{{ users[6] }}</td>
+                    </tr>
+                    <tr class="text-white">
+                        <td>Email</td>
+                        <td>{{ users[7] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="text-center">
+                <a href="{{url_for('blueprint.edit', user_id=users[0])}}" class="btn btn-warning w-100">Edit</a>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
+    
     
     
     

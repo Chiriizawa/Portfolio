@@ -85,7 +85,18 @@ def python():
 def profile():
     if 'user' not in session:
         return redirect(url_for('blueprint.index'))
-    response = make_response(render_template('profile.html'))
+    
+    if 'user' not in session:
+        return redirect(url_for('blueprint.index'))
+    
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM tbl_project LIMIT 1')
+    data = cursor.fetchall()
+    cursor.close()
+    connection.close()
+
+    response = make_response(render_template('profile.html', data=data))
     return make_header(response)
 
 @blueprint.route('/dashboard/info')
@@ -103,7 +114,7 @@ def info():
     response = make_response(render_template('info.html', data=data))
     return make_header(response)
 
-@blueprint.route('/add-info', methods=['GET', 'POST'])
+@blueprint.route('/Add-Info', methods=['GET', 'POST'])
 def add():
 
     if request.method == "POST":
@@ -185,6 +196,106 @@ def add():
     }
     response = make_response(render_template("add.html", form_data=form_data, errors={}))
     return make_header(response)
+
+@blueprint.route('/Edit_Profile', methods=['GET', 'POST'])
+def edit():
+
+    try:
+
+        if 'user' not in session or not session['user']:
+            return redirect(url_for('blueprint.index'))
+        
+        id = 1  
+
+        if request.method == "POST":
+            form_data = {
+                'firstname': request.form.get('firstname', '').strip(),
+                'middlename': request.form.get('middlename', '').strip(),
+                'lastname': request.form.get('lastname', '').strip(),
+                'birthday': request.form.get('birthday', '').strip(),
+                'age': request.form.get('age', '').strip(),
+                'contactnumber': request.form.get('contactnumber', '').strip(),
+                'email': request.form.get('email', '').strip(),
+            }
+
+            age = int(form_data['age']) if form_data['age'].isdigit() else None
+
+            errors = {
+                "firstname": validate_first_name(form_data['firstname']),
+                "middlename": validate_middle_name(form_data['middlename']),
+                "lastname": validate_last_name(form_data['lastname']),
+                "birthday": validate_birthday(form_data['birthday'], age) if form_data['birthday'] and age else "Birthday and age are required.",
+                "age": validate_age(age) if age is not None else "Age must be a valid number.",
+                "contactnumber": validate_contact_number(form_data['contactnumber']),
+                "email": validate_email(form_data['email']),
+            }
+
+            errors = {field: msg for field, msg in errors.items() if msg}
+
+            if errors:
+                response = make_response(render_template('edit.html', form_data=form_data, errors=errors))
+                return make_header(response)
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            update_query = (
+                "UPDATE tbl_project SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contact=%s, email=%s WHERE id=%s"
+            )
+            update_values = (
+                form_data['firstname'],
+                form_data['middlename'],
+                form_data['lastname'],
+                form_data['birthday'],
+                age,
+                form_data['contactnumber'],
+                form_data['email'],
+                id,
+            )
+            cursor.execute(update_query, update_values)
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+
+            return redirect(url_for('blueprint.profile'))
+
+
+        conn = connect_db()
+        cursor = conn.cursor(dictionary=True)
+        select_query = "SELECT * FROM tbl_project WHERE id = %s"
+        cursor.execute(select_query, (id,))
+        user_data = cursor.fetchone()
+
+
+        form_data = {
+            'firstname': user_data.get('firstname', '') if user_data else '',
+            'middlename': user_data.get('middlename', '') if user_data else '',
+            'lastname': user_data.get('lastname', '') if user_data else '',
+            'birthday': user_data.get('birthday', '') if user_data else '',
+            'age': user_data.get('age', '') if user_data else '',
+            'contactnumber': user_data.get('contactnumber', '') if user_data else '',
+            'email': user_data.get('email', '') if user_data else '',
+        }
+
+        cursor.close()
+        conn.close()
+
+        response = make_response(render_template('edit.html', form_data=form_data, errors={}))
+        return make_header(response)
+
+    except Exception as e:
+        
+        error_message = f"An unexpected error occurred: {str(e)}"
+        form_data = {
+            'firstname': '',
+            'middlename': '',
+            'lastname': '',
+            'birthday': '',
+            'age': '',
+            'contactnumber': '',
+            'email': ''
+        }
+        response = make_response(render_template('edit.html', form_data=form_data, errors={"general": error_message}))
+        return make_header(response)
 
 
 @blueprint.route('/delete/<int:user_id>', methods=['GET', 'POST'])
