@@ -86,9 +86,6 @@ def profile():
     if 'user' not in session:
         return redirect(url_for('blueprint.index'))
     
-    if 'user' not in session:
-        return redirect(url_for('blueprint.index'))
-    
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM tbl_project LIMIT 1')
@@ -238,7 +235,7 @@ def edit():
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
             update_query = (
-                "UPDATE tbl_project SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contact=%s, email=%s WHERE id=%s"
+                "UPDATE tbl_project SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contactnumber=%s, email=%s WHERE id=%s"
             )
             update_values = (
                 form_data['firstname'],
@@ -296,6 +293,10 @@ def edit():
         }
         response = make_response(render_template('edit.html', form_data=form_data, errors={"general": error_message}))
         return make_header(response)
+    
+@blueprint.route('/update-page', methods=["GET"])
+def update_page():
+    return redirect(url_for('blueprint.edit'))
 
 
 @blueprint.route('/delete/<int:user_id>', methods=['GET', 'POST'])
